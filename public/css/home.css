@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", "sans-serif";
+}
+body{
+    background: transparent;
+    height: 150rem;
+    font-family: 'poppins', 'sans-serif';
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 25px 12.5%;
+  background: rgb(95, 95, 142);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+.navbar a {
+  position: relative;
+  font: 16px;
+  color: #e4e4e4;
+  text-align: none;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 30px;
+}
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6%;
+  width: 100%;
+  height: 2px;
+  background: #e4e4e4;
+  border-radius: 5px;
+  transform: translateY(10px);
+  text-decoration: none;
+  opacity: 0;
+  transition: .5s;
+}
+.navbar a:hover::after {
+
+  transform: translateY(0);
+  opacity: 1;
+
+}
+.serach_bar{
+    width: 250px;
+    font-weight: 45px;
+    background: transparent;
+    border: 2px solid #e4e4e4;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+.serach_bar input{
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #e4e4e4;
+
+}
+.serach_bar input::placeholder{
+    color: #e4e4e4;
+
+}
+.serach_bar button{
+    width: 40px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.serach_bar button i{
+    font-size: 22px;
+   color:  #e4e4e4;
+
+
+
+}
+.Container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 550px;
+    background: transparent ;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.Container .content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background : #fff;
+    padding: 80px;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.content .logo{
+    font-size: 30px;
+
+}
+.text h2{
+    font-size: 40px;
+    line-height: 1;
+}
+.text  h2 span{
+    font-size: 25px;
+}
+.text p{
+    font-size: 16px;
+    margin: 20px 0;
+    color: black;
+
+}
+.social_icons{
+    font-size: 20px;
+    color: black;
+    margin-right: 10px;
+
+}
+.social_icons a:hover i{
+    transform: scale(1.2);
+}
+.Container .logreg_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100%  -  50%); /* Add spaces around the subtraction operator */
+  height: 100%;
+  background:url(donation.jpg);
+  /* background: transparent ; */
+    background-size: cover; 
+    background-position: calc(100% - 50%);
+    /* background-size: auto; */
+
+}
