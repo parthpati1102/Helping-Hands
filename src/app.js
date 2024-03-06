@@ -11,12 +11,12 @@ app.use(express.urlencoded({extended:false}))
 // app.get("/",(req,res)=>{
 //     res.render("index")
 // })
-app.get("/home",(req,res)=>{
+app.get("/",(req,res)=>{
     res.render("home")
 })
 
 
-app.get("/",(req,res)=>{
+app.get("/login",(req,res)=>{
     res.render("login")
 })
 // app.get("/login",(req,res)=>{
