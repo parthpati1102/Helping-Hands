@@ -34,6 +34,9 @@ app.get("/contact",(req,res)=>{
 app.get("/about",(req,res)=>{
     res.render("about")
 })
+app.get("/donatefood",(req,res)=>{
+    res.render("donatefood")
+})
 
 
 app.post("/signup" , async(req,res)=>{
@@ -71,7 +74,18 @@ app.post('/login', async (req, res) => {
 
 
 })
+app.post("/contact" , async(req,res)=>{
+     
+    const data1={
+        name1:req.body.name1,
+        email1:req.body.email1,
+        message:req.body.message
+    }
 
+    await collection.insertMany([data1])
+
+     res.render("home")
+})
 const port = process.env.PORT || 3000;
 
 const static_path = path.join(__dirname , "../public")

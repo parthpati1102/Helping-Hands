@@ -32,3 +32,17 @@ const logInSchema=new mongoose.Schema({
 const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
 
 module.exports=LogInCollection
+
+const contactSchema = new mongoose.Schema({
+    name1:{
+        type:String
+    },
+    email1:{
+        type:String
+    },
+    message:{
+        type:String
+    }
+})
+const ContactCollection = new mongoose.model('ContactCollection' ,contactSchema)
+module.exports = ContactCollection
