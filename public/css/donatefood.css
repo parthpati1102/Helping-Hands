@@ -38,9 +38,6 @@ body{
     font-size: 28px;
     
 }
-form{
-    /* width:400px; */
-}
 .input input{
     width:100%;
     font-size:20px;
@@ -67,12 +64,6 @@ button{
     border: .5px solid black;
     width: 100%;
     
-}
-.radio .value{
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
-    
-
 }
 
 .radio input{
@@ -146,15 +137,6 @@ button:hover{
 
     
   }
-/*  */
-  /* .input #email{
-    display: block;
-    width: 200px;
-  }
-  .input #phoneno{
-    width: 200px;
-    display: block;
-  } */
 
 
 

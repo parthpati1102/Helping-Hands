@@ -31,7 +31,7 @@ const logInSchema=new mongoose.Schema({
 
 const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
 
-module.exports=LogInCollection
+// module.exports=LogInCollection
 
 const contactSchema = new mongoose.Schema({
     name1:{
@@ -45,4 +45,9 @@ const contactSchema = new mongoose.Schema({
     }
 })
 const ContactCollection = new mongoose.model('ContactCollection' ,contactSchema)
-module.exports = ContactCollection
+// module.exports = ContactCollection
+
+module.exports = {
+    LogInCollection,
+    ContactCollection
+};
