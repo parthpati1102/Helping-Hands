@@ -1,11 +1,15 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-const { LogInCollection, ContactCollection } = require("./db/conn");
+const { LogInCollection, ContactCollection, DonateFoodCollection } = require("./db/conn");
 require("./db/conn");
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Server is running at port number ${port}`);
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +44,29 @@ app.get("/about", (req, res) => {
 
 app.get("/donatefood", (req, res) => {
     res.render("donatefood");
+});
+app.get("/blogs", (req, res) => {
+    res.render("blogs");
+});
+
+app.post("/donatefood", async (req, res) => {
+    try {
+        const data = {
+            name3: req.body.name3,
+            email3: req.body.email3,
+            phone: req.body.phone,
+            address:req.body.address,
+            donationtype:req.body.donationtype,
+            quantity:req.body.quantity,
+            pickup:req.body.pickup,
+            datetime:req.body.datetime,
+        };
+        await DonateFoodCollection.create(data);
+        res.render("home");
+    } catch (error) {
+        console.error("Error saving Donor:", error);
+        res.status(500).send("Error occurred while saving Donor.");
+    }
 });
 
 app.post("/contact", async (req, res) => {
@@ -84,7 +111,8 @@ app.post("/login", async (req, res) => {
         if (user.password === password) {
             res.render("home");
         } else {
-            res.send("Incorrect password");
+            const wrong = `<h1>Sorry,You Have Entered Wrong Details<h1/>`
+            res.send(wrong);
         }
     } catch (error) {
         console.error("Error during login:", error);
@@ -92,6 +120,4 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running at port number ${port}`);
-});
+

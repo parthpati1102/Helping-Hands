@@ -47,7 +47,37 @@ const contactSchema = new mongoose.Schema({
 const ContactCollection = new mongoose.model('ContactCollection' ,contactSchema)
 // module.exports = ContactCollection
 
+const DonateFoodSchema = new mongoose.Schema({
+    name3:{
+        type:String
+    },
+    email3:{
+        type:String
+    },
+    phone:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    donationtype:{
+        type:String
+    },
+    quantity:{
+        type:String
+    },
+    pickup:{
+        type:String
+    },
+    datetime:{
+        type:String
+    }
+})
+
+const DonateFoodCollection = new mongoose.model('DonateFoodCollection' ,DonateFoodSchema)
+
 module.exports = {
     LogInCollection,
-    ContactCollection
+    ContactCollection,
+    DonateFoodCollection
 };
