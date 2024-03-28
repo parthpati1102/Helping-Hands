@@ -17,7 +17,7 @@
 
 }
 header{
-    width: 93%;
+    /* width: 93%; */
     height: 80px;
     background-color: var(--navcolor);
     display: flex;
