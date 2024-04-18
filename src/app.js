@@ -48,6 +48,9 @@ app.get("/donatefood", (req, res) => {
 app.get("/blogs", (req, res) => {
     res.render("blogs");
 });
+app.get("/gallery", (req, res) => {
+    res.render("gallery");
+});
 
 app.post("/donatefood", async (req, res) => {
     try {

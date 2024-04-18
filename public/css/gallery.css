@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;0,700;0,800;1,400;1,600&display=swap');
+:root{
+  --navcolor:white;
+  --navfont:black;
+  --green:#06C167;
+  --box-shadow:0 .5rem 1rem rgba(0,0,0.1)
+}
+*{
+  
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  /* font-family:sans-serif; */
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+body{
+  background-color: #fefefe;
+  padding: 0% !important;
+}
+/* navigation bar  */
+header{
+  width: 100%;
+  height: 80px;
+  background-color: var(--navcolor);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+}
+.logo{
+  font-size: 28px;
+  color:var(--navfont);
+}
+.hamburger{
+  display:none;
+}
+.nav-bar ul{
+  display: flex;
+}
+.nav-bar ul li a{
+   display: block;
+   color: var(--navfont);
+   font-size: 20px ;
+   padding:10px 25px;
+   border-radius: 50px;
+   transition: 0.2s;
+   margin: 0 5px;
+
+}
+.nav-bar ul li a:hover{
+  color: var(--navcolor);
+  background-color: var(--navfont);
+}
+.nav-bar ul li a.active{
+  color:var(--navcolor);
+  background-color: var(--navfont);
+}
+@media only screen and (max-width:1320px){
+  header{
+    padding:0 50px;
+  }
+  .banner{
+    width: 100%;
+    height: 90vh;
+    background:url('cover.jpeg')no-repeat;
+  background-size: cover;
+  display: grid;
+  place-items:center;
+  padding-top: 8rem;
+  }
+}
+@media only screen and (max-width:1100px){
+  header{
+    padding:0 30px;
+  }
+}
+@media only screen and (max-width:900px){
+  
+  .hamburger{
+    display: block;
+    cursor: pointer;
+  }
+  .hamburger .line{
+    width:30px;
+    height: 3px;
+    background-color:var(--navfont);
+    margin: 6px 0;
+  }
+  .nav-bar{
+    height: 0;
+    position: absolute;
+    top:80px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background-color: #06C167;
+    transition: 0.2s;
+    overflow: hidden;
+
+  }
+  .nav-bar.active {
+    height: 450px;
+    z-index: 10;
+  }
+ 
+  .nav-bar ul{
+    display: block;
+    width:fit-content;
+
+    text-align: center;
+    transition: 0.5s;
+    opacity: 0;
+
+  }
+  .nav-bar.active ul {
+    opacity: 1;
+
+  }
+  .nav-bar ul li a{
+    margin-bottom: 12px;
+
+  }
+  .banner{
+    background-image: none;
+  }
+}
+/* nav end */
+
+.image {
+	  width: 100%;
+	  height: 250px;
+	  background-size: cover;
+	  background-position: center center;
+			}
+.image1 {
+  background-image: url(https://media.istockphoto.com/id/1498170916/photo/a-couple-is-taking-a-bag-of-food-at-the-food-and-clothes-bank.webp?b=1&s=170667a&w=0&k=20&c=9P0Mwd1h7-lLJEROWQS12zNc_HSAxCxK_k0euLl1_yE=);
+}
+.image2 {
+  background-image: url(https://media.istockphoto.com/id/1372606314/photo/portrait-of-a-volunteer-working-in-a-community-charity-donation-center.webp?b=1&s=170667a&w=0&k=20&c=orV3RlvgS6E_xNeb9F3hPq0vDGcYs8ETxt2Q-rar0Pg=);
+}
+.image3 {
+		background-image: url(https://media.istockphoto.com/id/1372606861/photo/volunteers-hand-giving-donations-to-a-person-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wB_AfqhVewFDXEpTjHIggOwS3BVXVHktNLBxgQAcl2M=);
+	}
+.image4 {
+		background-image: url(https://media.istockphoto.com/id/1176766131/photo/a-poor-homeless-happy-smiling-orphan-child.jpg?s=612x612&w=0&k=20&c=fLGuAtHvEpbZRURwTAiOdBgKE8xtVmcPzQq_uNQrWmQ=);
+	}
+.image5 {
+		background-image: url(https://media.istockphoto.com/id/941788480/photo/portrait-of-girl-kid-having-mid-day-meal-in-indian-school.jpg?s=612x612&w=0&k=20&c=tdMRbWtA9rtYSE_6EpXpSl5E4d4xdvqK7egdYd_Q_MM=);
+	}
+.image6 {
+		background-image: url(https://media.istockphoto.com/id/1314210487/photo/brother-and-sister-packing-clothes-and-toy-in-the-donation-box.jpg?s=612x612&w=0&k=20&c=t6m0570S6HRc8pIBHW2Tgc7VEvCX8aCSsx4OXjXGYgA=);
+	}
+.image7 {
+		background-image: url(https://media.istockphoto.com/id/1981316717/photo/we-will-do-a-good-deed-for-children-who-need-toys.jpg?s=612x612&w=0&k=20&c=Ace-Qtd0wwJ2d7aa8uTBlCwENrvkrBaI6mndKdWGSuE=);
+	}
+.image8{
+		background-image: url(https://media.istockphoto.com/id/1347039938/photo/serving-ghugni-in-a-white-thermocol-plate-with-spoon-at-a-street-food-stall-in-kolkata.jpg?s=612x612&w=0&k=20&c=UBVwk134VHeG-XsvP-iGbvoZWCI9YZ2Gvj0kSO9d21w=);
+}
+.image9{
+	background-image: url(https://media.istockphoto.com/id/1408430485/photo/giving-back-to-the-community.jpg?s=612x612&w=0&k=20&c=60FzoUxjIq47t94gzz6y0aAGac3wf1XakNl-tMJNRWs=);
+}
+	
+body {
+	padding-top: 70px;
+}
+
+.jumbotron {
+	color: #06C167;
+	background-color: #ecf0f1;
+  text-align: center;
+}
+
+.navbar {
+	background-color: #06C167;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
+
+a{
+  text-decoration: none !important;
+}
