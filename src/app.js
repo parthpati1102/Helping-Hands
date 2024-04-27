@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-const { LogInCollection, ContactCollection, DonateFoodCollection } = require("./db/conn");
+const { LogInCollection,SignUpCollection, ContactCollection, DonateFoodCollection,VolunteerCollection } = require("./db/conn");
 require("./db/conn");
 
 const app = express();
@@ -34,6 +34,10 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 });
 
+app.get("/signin", (req, res) => {
+    res.render("signin");
+});
+
 app.get("/contact", (req, res) => {
     res.render("contact");
 });
@@ -52,7 +56,26 @@ app.get("/gallery", (req, res) => {
     res.render("gallery");
 });
 
-app.post("/donatefood", async (req, res) => {
+app.get("/donate", (req, res) => {
+    res.render("donate");
+});
+
+app.post("/volunteer", async (req, res) => {
+    try {
+        const data = {
+            volname: req.body.volname,
+            volemail: req.body.volemail,
+            volmsg: req.body.volmsg
+        };
+        await VolunteerCollection.create(data);
+        res.render("home");
+    } catch (error) {
+        console.error("Error saving contact:", error);
+        res.status(500).send("Error occurred while saving contact.");
+    }
+});
+
+app.post("/donate", async (req, res) => {
     try {
         const data = {
             name3: req.body.name3,
@@ -61,8 +84,8 @@ app.post("/donatefood", async (req, res) => {
             address:req.body.address,
             donationtype:req.body.donationtype,
             quantity:req.body.quantity,
-            pickup:req.body.pickup,
-            datetime:req.body.datetime,
+            // pickup:req.body.pickup,
+            // datetime:req.body.datetime,
         };
         await DonateFoodCollection.create(data);
         res.render("home");
@@ -93,7 +116,8 @@ app.post("/signup", async (req, res) => {
             name: req.body.name,
             password: req.body.password,
             role: req.body.role,
-            email: req.body.email
+            email: req.body.email,
+            age: req.body.age
         };
         await LogInCollection.create(data);
         res.render("home");
@@ -102,17 +126,41 @@ app.post("/signup", async (req, res) => {
         res.status(500).send("Error occurred while saving user.");
     }
 });
+app.post("/signin", async (req, res) => {
+    try {
+        const data = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+            phonenumber: req.body.phonenumber,
+            gender: req.body.gender,
+            tanNumber: req.body.tanNumber,
+            panNumber: req.body.panNumber,
+            organisationname : req.body.organisationname,
+            address : req.body.address,
+            city : req.body.city,
+            state: req.body.state,
+            zipcode: req.body.zipcode,
+        };
+        await SignUpCollection.create(data);
+        res.render("home");
+    } catch (error) {
+        console.error("Error saving user:", error);
+        res.status(500).send("Error occurred while saving user.");
+    }
+});
 
-app.post("/login", async (req, res) => {
+app.post("/", async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await LogInCollection.findOne({ email });
+        const user = await SignUpCollection.findOne({ email });
         if (!user) {
             res.send("User not found");
             return;
         }
         if (user.password === password) {
-            res.render("home");
+            res.render("ngopage");
         } else {
             const wrong = `<h1>Sorry,You Have Entered Wrong Details<h1/>`
             res.send(wrong);

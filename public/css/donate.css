@@ -1,23 +1,9 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;0,700;0,800;1,400;1,600&display=swap');
 :root{
     --navcolor:white;
     --navfont:black;
     --green:#06C167;
     --box-shadow:0 .5rem 1rem rgba(0,0,0.1)
   }
-  .thumbnail {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 1);
-    overflow: hidden;
-    cursor: pointer;
-    object-fit: cover;
-    transition: 1s linear;
-}
-
-.thumbnail:hover {
-    transform: scale(1.2);
-    /* z-index: 2; */
-}
   *{
     
     margin: 0;
@@ -31,7 +17,6 @@
   }
   body{
     background-color: #fefefe;
-    padding: 0% !important;
   }
   /* navigation bar  */
   header{
@@ -78,7 +63,7 @@
     .banner{
       width: 100%;
       height: 90vh;
-      background:url('cover.jpeg')no-repeat;
+       background:url('cover.jpeg')no-repeat; 
     background-size: cover;
     display: grid;
     place-items:center;
@@ -122,7 +107,7 @@
     .nav-bar ul{
       display: block;
       width:fit-content;
-  
+      margin: 80px auto 0 auto;
       text-align: center;
       transition: 0.5s;
       opacity: 0;
@@ -141,66 +126,76 @@
     }
   }
   /* nav end */
-  .image {
-    width: 100%;
-    height: 250px;
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .main{
+    background : url('donate.jpg')no-repeat;
     background-size: cover;
-    background-position: center center;
-          }
-.image1 {
-background-image: url(https://media.istockphoto.com/id/1498170916/photo/a-couple-is-taking-a-bag-of-food-at-the-food-and-clothes-bank.webp?b=1&s=170667a&w=0&k=20&c=9P0Mwd1h7-lLJEROWQS12zNc_HSAxCxK_k0euLl1_yE=);
+    height: 80vh;
+    width: 100%;
+  }
+
+  .custom-img {
+    width: 287px;
+    height: 220px;
 }
-.image2 {
-background-image: url(https://media.istockphoto.com/id/1372606314/photo/portrait-of-a-volunteer-working-in-a-community-charity-donation-center.webp?b=1&s=170667a&w=0&k=20&c=orV3RlvgS6E_xNeb9F3hPq0vDGcYs8ETxt2Q-rar0Pg=);
+.image{
+  background : url('bg_4.jpg')no-repeat;
+    background-size: cover;
+    height: 60vh;
+    width: 40%;
 }
-.image3 {
-      background-image: url(https://media.istockphoto.com/id/1372606861/photo/volunteers-hand-giving-donations-to-a-person-at-a-community-center.jpg?s=612x612&w=0&k=20&c=wB_AfqhVewFDXEpTjHIggOwS3BVXVHktNLBxgQAcl2M=);
+h1 {
+        font-size: 36px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    }
+    .card-text {
+      color: #333;
+      font-size: 18px;
+      font-weight: bold; 
+      line-height: 1.5;
   }
-.image4 {
-      background-image: url(https://media.istockphoto.com/id/1176766131/photo/a-poor-homeless-happy-smiling-orphan-child.jpg?s=612x612&w=0&k=20&c=fLGuAtHvEpbZRURwTAiOdBgKE8xtVmcPzQq_uNQrWmQ=);
+  .card-text1{
+    opacity: 0.6;
   }
-.image5 {
-      background-image: url(https://media.istockphoto.com/id/941788480/photo/portrait-of-girl-kid-having-mid-day-meal-in-indian-school.jpg?s=612x612&w=0&k=20&c=tdMRbWtA9rtYSE_6EpXpSl5E4d4xdvqK7egdYd_Q_MM=);
-  }
-.image6 {
-      background-image: url(https://media.istockphoto.com/id/1314210487/photo/brother-and-sister-packing-clothes-and-toy-in-the-donation-box.jpg?s=612x612&w=0&k=20&c=t6m0570S6HRc8pIBHW2Tgc7VEvCX8aCSsx4OXjXGYgA=);
-  }
-.image7 {
-      background-image: url(https://media.istockphoto.com/id/1981316717/photo/we-will-do-a-good-deed-for-children-who-need-toys.jpg?s=612x612&w=0&k=20&c=Ace-Qtd0wwJ2d7aa8uTBlCwENrvkrBaI6mndKdWGSuE=);
-  }
-.image8{
-      background-image: url(https://media.istockphoto.com/id/1347039938/photo/serving-ghugni-in-a-white-thermocol-plate-with-spoon-at-a-street-food-stall-in-kolkata.jpg?s=612x612&w=0&k=20&c=UBVwk134VHeG-XsvP-iGbvoZWCI9YZ2Gvj0kSO9d21w=);
+  .edit{
+    color: #06C167;
+    text-decoration: underline !important;
 }
-.image9{
-  background-image: url(https://media.istockphoto.com/id/1408430485/photo/giving-back-to-the-community.jpg?s=612x612&w=0&k=20&c=60FzoUxjIq47t94gzz6y0aAGac3wf1XakNl-tMJNRWs=);
-}
-  
-body {
-  padding-top: 70px;
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #059a52;
+  border: 2px solid #059a52;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
-.jumbotron {
-  color: #06C167;
-  background-color: #ecf0f1;
-  text-align: center;
-}
-
-.navbar {
+/* .btn:hover {
   background-color: #06C167;
+  border-color: #06C167;
+} */
+
+.btn:active {
+  background-color: #06C167;
+  border-color: #06C167;
+  color: #fff;
 }
 
-.navbar-inverse .navbar-nav>li>a {
-  color: white;
-}
 
-.navbar-inverse .navbar-brand {
-  color: white;
+.bg-cool {
+  background-color: #d4f4f4; /* Light teal */
 }
-
-a{
-text-decoration: none !important;
-}
-
 /* footer */
 .footer {
   background-color: #414141;
@@ -410,8 +405,4 @@ text-decoration: none !important;
  text-align: center; 
  text-decoration: underline 5px;
  text-decoration-color: #06C167;
-}
-
-a{
-  text-decoration: none !important;
 }

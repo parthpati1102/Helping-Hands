@@ -29,7 +29,71 @@ const logInSchema=new mongoose.Schema({
     }
 })
 
-const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
+logInSchema.add({
+    age:{
+        type: Number,
+        required: true
+    }
+})
+
+ const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
+
+const SignUpSchema=new mongoose.Schema({
+    firstname:{
+        type:String,
+        required:true
+    },
+    lastname:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    phonenumber:{
+        type:Number,
+        required:true
+    },
+    gender:{
+        type:String,
+        required:true
+    },
+    tanNumber:{
+        type:String,
+        required:true
+    },
+    panNumber:{
+        type:String,
+        required:true
+    },
+    organisationname:{
+        type:String,
+        required:true
+    },
+    address:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
+    state:{
+        type:String,
+        required:true
+    },
+    zipcode:{
+        type:String,
+        required:true
+    },
+
+})
+const SignUpCollection = new mongoose.model('SignUpCollection',SignUpSchema)
 
 // module.exports=LogInCollection
 
@@ -65,19 +129,41 @@ const DonateFoodSchema = new mongoose.Schema({
     },
     quantity:{
         type:String
-    },
-    pickup:{
-        type:String
-    },
-    datetime:{
-        type:String
     }
+    // pickup:{
+    //     type:String
+    // },
+    // datetime:{
+    //     type:String
+    // }
 })
+
+delete DonateFoodSchema.obj.pickup;
+delete DonateFoodSchema.obj.datetime;
 
 const DonateFoodCollection = new mongoose.model('DonateFoodCollection' ,DonateFoodSchema)
 
+const VolunteerSchema = new mongoose.Schema({
+        volname : {
+            type : String,
+            required: true
+        },
+        volemail : {
+            type : String,
+            required: true
+        },
+        volmsg : {
+            type : String,
+            required: true
+        }
+})
+
+const VolunteerCollection = new mongoose.model('VolunteerCollection' ,VolunteerSchema)
+
 module.exports = {
     LogInCollection,
+    SignUpCollection,
     ContactCollection,
-    DonateFoodCollection
+    DonateFoodCollection,
+    VolunteerCollection
 };
