@@ -130,18 +130,21 @@ const DonateFoodSchema = new mongoose.Schema({
     quantity:{
         type:String
     }
-    // pickup:{
-    //     type:String
-    // },
-    // datetime:{
-    //     type:String
-    // }
+})
+
+DonateFoodSchema.add({
+    donated_at:{
+        type: Date
+    }
 })
 
 delete DonateFoodSchema.obj.pickup;
 delete DonateFoodSchema.obj.datetime;
 
+
+
 const DonateFoodCollection = new mongoose.model('DonateFoodCollection' ,DonateFoodSchema)
+ 
 
 const VolunteerSchema = new mongoose.Schema({
         volname : {
@@ -156,6 +159,12 @@ const VolunteerSchema = new mongoose.Schema({
             type : String,
             required: true
         }
+})
+
+VolunteerSchema.add({
+    message_at:{
+        type: Date
+    }
 })
 
 const VolunteerCollection = new mongoose.model('VolunteerCollection' ,VolunteerSchema)

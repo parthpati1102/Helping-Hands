@@ -1,0 +1,15 @@
+*{
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-card {
+       max-height: 450px; /* Adjust the max-height as needed */
+       overflow-y: auto; /* Add vertical scroll if content exceeds max-height */
+   }
+   
+   .card-body {
+       overflow: hidden; /* Hide overflowing content */
+   }
+   
