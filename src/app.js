@@ -159,40 +159,89 @@ app.post("/", async (req, res) => {
 
 app.get("/ngopage" ,async (req, res) => {
     let donateitems = await DonateFoodCollection.find();
-    // console.log(donateitems);
-    res.render("ngomain" , {donateitems});
+    let volunteer = await VolunteerCollection.find();
+    res.render("ngomain" , {donateitems ,volunteer});
 });
 
 app.post("/ngopage", (req, res) => {
     try {
-        const newData = new DonateFoodCollection({
-            name3: req.body.name3,
-            email3: req.body.email3,
-            phone: req.body.phone,
-            address: req.body.address,
-            donationtype: req.body.donationtype,
-            quantity: req.body.quantity,
-            donated_at: new Date(),
-        });
 
-        newData.save()
-            .then(() => {
-                // console.log("Data is saved");
-                res.render("home");
-            })
-            .catch((err) => {
-                console.error("Error saving data:", err);
-                res.status(500).send("Error occurred while saving data.");
+        if (req.body.donationtype && req.body.quantity) {
+            const newData = new DonateFoodCollection({
+                name3: req.body.name3,
+                email3: req.body.email3,
+                phone: req.body.phone,
+                address: req.body.address,
+                donationtype: req.body.donationtype,
+                quantity: req.body.quantity,
+                donated_at: new Date(),
             });
+
+            newData.save()
+                .then(() => {
+        
+                    res.redirect("/");
+                })
+                .catch((err) => {
+                    console.error("Error saving donation data:", err);
+                    res.status(500).send("Error occurred while saving donation data.");
+                });
+        } else {
+
+            const newVolunteer = new VolunteerCollection({
+                volname: req.body.volname,
+                volemail: req.body.volemail,
+                volmsg: req.body.volmsg,
+                message_at: new Date(),
+            });
+
+            newVolunteer.save()
+                .then(() => {
+            
+                    res.redirect("/");
+                })
+                .catch((err) => {
+                    console.error("Error saving volunteer data:", err);
+                    res.status(500).send("Error occurred while saving volunteer data.");
+                });
+        }
     } catch (error) {
         console.error("Error in request:", error);
         res.status(500).send("An error occurred in the request.");
     }
 });
-
 app.delete("/ngopage/:id" , async (req,res) =>{
     let {id} = req.params;
-    let donateitem = await DonateFoodCollection.findByIdAndDelete(id);
-    //  console.log(donateitem);
-     res.redirect("/ngopage");
-})
+    try {
+
+        const donation = await DonateFoodCollection.findById(id);
+        const volunteer = await VolunteerCollection.findById(id);
+
+        if (donation) {
+            await DonateFoodCollection.findByIdAndDelete(id);
+            res.redirect("/ngopage");
+        } else if (volunteer) {
+            await VolunteerCollection.findByIdAndDelete(id);
+            res.redirect("/ngopage");
+        } else {
+            res.status(404).send("Item not found");
+        }
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        res.status(500).send("An error occurred while deleting item.");
+    }
+});
+
+app.get("/logout", (req, res) => {
+    // Clear the session or token associated with the user
+    // For example, if using sessions, you can destroy the session
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error while destroying session:", err);
+            res.status(500).send("An error occurred during logout.");
+            return;
+        }
+        // Redirect the user to the login page after logout
+        res.redirect("/");
+    });
+});

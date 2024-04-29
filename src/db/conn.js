@@ -158,7 +158,7 @@ const VolunteerSchema = new mongoose.Schema({
         volmsg : {
             type : String,
             required: true
-        }
+        },
 })
 
 VolunteerSchema.add({
