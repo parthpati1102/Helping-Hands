@@ -19,7 +19,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">NGO Name</a>
+       <a class="navbar-brand" href="#">{{ organisationname }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,17 +52,25 @@
         </div>
     </div>
 </nav>
-
+<div class="container-fluid welcome-back gradient-background">
+  <div class="row">
+    <div class="col-lg-12 welcome">
+      <h1>Welcome</h1> 
+      <h2>{{ organisationname }}</h2>
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid bg-light text-dark py-3">
     <header class="text-center">
       <h1>Request By Donor</h1>
     </header>
-  </div>
- 
+</div>
+
 <div class="container p-3">
     <div class="row  gy-3">
       {{#each donateitems}}
+      {{#unless this.anonymous}}
       <div class="col-3">
         <div class="card custom-card" style="width: 18rem;">
           <div class="card-body">
@@ -75,8 +83,8 @@
             {{!-- <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a> --}}
             <form method="post" action="/ngopage/{{this.id}}?_method=DELETE">
-            <div class="col-12 pb-2">
-            <button type="submit" class="btn btn-primary">Accept</button>
+            <div class="col-12 pb-2 text-center">
+            <button type="submit" class="btn btn-primary w-100">Accept</button>
             </div>
             </form>
             <h6 class="card-subtitle mb-2 text-muted py-2">{{ this.donated_at}}</h6>
@@ -84,6 +92,7 @@
           </div>
         </div>
       </div>
+       {{/unless}}
       {{/each}}
     </div>
   </div>
@@ -102,11 +111,11 @@
             <p class="card-text">email: {{this.volemail}}</p>
             <p class="card-text">message : {{this.volmsg}}</p>
             <form method="post" action="/ngopage/{{this.id}}?_method=DELETE">
-            <div class="col-12 pb-2">
-            <button type="submit" class="btn btn-primary">Accept</button>
+            <div class="col-12 pb-2 text-center">
+            <button type="submit" class="btn btn-primary w-100">Accept</button>
             </div>
             </form>
-            <h6 class="card-subtitle mb-2 text-muted py-2">{{ this.message_at}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted py-2">{{this.message_at}}</h6>
             {{!-- <h6 class="card-subtitle mb-2 text-muted">{{ this.donated_at}}</h6> --}}
           </div>
         </div>
@@ -114,6 +123,38 @@
       {{/each}}
     </div>
   </div>
+  <footer class="bg-dark text-light py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About US</h5>
+                <p>{{ organisationname }}</p>
+                <p>{{address}}</p>
+                <p>{{city}}, {{state}}</p>
+                <p>Email: {{email}}</p>
+                <p>Phone: {{ phonenumber }}</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Verified Credentials</h5>
+                <ul class="list-unstyled">
+                    <p>Owner: {{firstname}} {{lastname}}</p>
+                    <p>PAN No. : {{panNumber}}</p>
+                    <p>TAN No. : {{tanNumber}}</p>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Our Work</h5>
+                <p>Individual Fundraising</p>
+                <p>Corporate Partnerships</p>
+                <p>Capacity Building</p>
+                <p>Volunteering</p>
+                {{!-- <a href="#" class="btn btn-outline-light me-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-outline-light me-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="btn btn-outline-light me-2"><i class="fab fa-instagram"></i></a> --}}
+            </div>
+        </div>
+    </div>
+</footer>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>

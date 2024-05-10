@@ -4,6 +4,7 @@ const hbs = require("hbs");
 const { LogInCollection,SignUpCollection, ContactCollection, DonateFoodCollection,VolunteerCollection } = require("./db/conn");
 require("./db/conn");
 const methodOverride = require('method-override');
+const session = require('express-session');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,12 +16,19 @@ app.listen(port, () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true } // Set to true if using HTTPS
+}));
 
 const static_path = path.join(__dirname, "../public");
 const view_path = path.join(__dirname, "../views");
 const partials_path = path.join(__dirname, "../partials");
 
 app.use(express.static(static_path));
+app.set("views" , view_path);
 app.set("view engine", "hbs");
 hbs.registerPartials(partials_path);
 
@@ -137,18 +145,36 @@ app.post("/signin", async (req, res) => {
     }
 });
 
+let loggedInNGO = null;
+
+
+const SESSION_EXPIRATION_TIME = 1 * 60 * 1000; 
+
 app.post("/", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await SignUpCollection.findOne({ email });
+
         if (!user) {
             res.send("User not found");
             return;
         }
+
         if (user.password === password) {
+            if (loggedInNGO) {
+                let show = `<h2>Another NGO is already logged in. Please try again later.</h2>`
+                res.send(show);
+                return;
+            }
+
+            loggedInNGO = user;
+            // console.log(loggedInNGO);
+             
+            req.session.cookie.expires = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+
             res.redirect("/ngopage");
         } else {
-            const wrong = `<h1>Sorry,You Have Entered Wrong Details<h1/>`
+            const wrong = `<h1>Sorry, You have entered wrong details<h1/>`;
             res.send(wrong);
         }
     } catch (error) {
@@ -157,16 +183,73 @@ app.post("/", async (req, res) => {
     }
 });
 
-app.get("/ngopage" ,async (req, res) => {
-    let donateitems = await DonateFoodCollection.find();
-    let volunteer = await VolunteerCollection.find();
-    res.render("ngomain" , {donateitems ,volunteer});
+app.get("/logout", (req, res) => {
+    if (loggedInNGO) {
+        loggedInNGO = null;
+        req.session.destroy((err) => {
+            if (err) {
+                console.error("Error while destroying session:", err);
+                res.status(500).send("An error occurred during logout.");
+                return;
+            }
+            res.redirect("/");
+        });
+    } else {
+        res.redirect("/");
+    }
+});
+
+// app.get("/logout", (req, res) => {
+//     req.session.destroy((err) => {
+//         if (err) {
+//             console.error("Error while destroying session:", err);
+//             res.status(500).send("An error occurred during logout.");
+//             return;
+//         }
+//         res.redirect("/");
+//     });
+// });
+
+
+
+app.get("/ngopage", async (req, res) => {
+    try {
+        let donateitems = await DonateFoodCollection.find();
+        let volunteer = await VolunteerCollection.find();
+
+    
+        if (loggedInNGO) {
+    
+            //  loggedInNGO = req.session.loggedInNGO;
+             
+            const organisationname = loggedInNGO.organisationname;
+            const phonenumber = loggedInNGO.phonenumber;
+            const address = loggedInNGO.address;
+            const state = loggedInNGO.state;
+            const city = loggedInNGO.city;
+            const email = loggedInNGO.email;
+            const firstname = loggedInNGO.firstname;
+            const lastname = loggedInNGO.lastname;
+            const panNumber = loggedInNGO.panNumber;
+            const tanNumber = loggedInNGO.tanNumber;
+    
+            res.render("ngomain", { organisationname,phonenumber,address, donateitems,state,city,email,firstname,lastname,panNumber,tanNumber, volunteer});
+        } else {
+            res.render("ngomain", { organisationname: 'NGO NAME', donateitems, volunteer });
+        }
+    } catch (error) {
+        console.error("Error rendering ngopage:", error);
+        res.status(500).send("An error occurred while rendering ngopage.");
+    }
 });
 
 app.post("/ngopage", (req, res) => {
     try {
 
         if (req.body.donationtype && req.body.quantity) {
+
+            const anonymous = req.body.anonymous === 'on';
+            
             const newData = new DonateFoodCollection({
                 name3: req.body.name3,
                 email3: req.body.email3,
@@ -174,6 +257,7 @@ app.post("/ngopage", (req, res) => {
                 address: req.body.address,
                 donationtype: req.body.donationtype,
                 quantity: req.body.quantity,
+                anonymous:anonymous,
                 donated_at: new Date(),
             });
 
@@ -194,6 +278,7 @@ app.post("/ngopage", (req, res) => {
                 volmsg: req.body.volmsg,
                 message_at: new Date(),
             });
+
 
             newVolunteer.save()
                 .then(() => {
@@ -217,6 +302,7 @@ app.delete("/ngopage/:id" , async (req,res) =>{
         const donation = await DonateFoodCollection.findById(id);
         const volunteer = await VolunteerCollection.findById(id);
 
+
         if (donation) {
             await DonateFoodCollection.findByIdAndDelete(id);
             res.redirect("/ngopage");
@@ -230,18 +316,4 @@ app.delete("/ngopage/:id" , async (req,res) =>{
         console.error("Error deleting item:", error);
         res.status(500).send("An error occurred while deleting item.");
     }
-});
-
-app.get("/logout", (req, res) => {
-    // Clear the session or token associated with the user
-    // For example, if using sessions, you can destroy the session
-    req.session.destroy((err) => {
-        if (err) {
-            console.error("Error while destroying session:", err);
-            res.status(500).send("An error occurred during logout.");
-            return;
-        }
-        // Redirect the user to the login page after logout
-        res.redirect("/");
-    });
 });

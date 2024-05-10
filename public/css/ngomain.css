@@ -12,4 +12,56 @@
    .card-body {
        overflow: hidden; /* Hide overflowing content */
    }
+
+   .gradient-background {
+    background: linear-gradient(135deg, #70C1B3, #247BA0);
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
    
+  .welcome{
+    padding: 100px 0px;
+  }
+
+  .welcome-back{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .welcome h1{
+    font-size: 6rem;
+  }
+  .welcome h2{
+    font-size: 3rem;
+  }
+
+  .card-title{
+    color:#08941d;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    /* font-weight: bold; */
+    color: #fff;
+    background-color: #059a52;
+    border: 2px solid #059a52;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  }
+
+  .navbar{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 1.2rem; /* Adjust the font size as needed */
+  }
+
+  .navbar-brand{
+    font-size: 2rem; /* Adjust the font size as needed */
+  }

@@ -138,6 +138,13 @@ DonateFoodSchema.add({
     }
 })
 
+DonateFoodSchema.add({
+    anonymous: {
+        type: Boolean, // Assuming anonymous is a boolean field
+        default: false // Default value is false, indicating not anonymous
+    }
+})
+
 delete DonateFoodSchema.obj.pickup;
 delete DonateFoodSchema.obj.datetime;
 
